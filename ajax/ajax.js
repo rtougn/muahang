@@ -28,7 +28,7 @@ $(document).ready(function() {
         $.ajax({
             url: 'php/mua.php',
             type: "POST",
-            data: ({ten: $('#txtten').val(),soluong: $('#sl').val()}),
+            data: ({ten: $("input[name=txtten]:checked").val(),soluong: $('#sl').val()}),
             success: function(data){
                 $("#kq").text(data);
                 loadtien();
@@ -38,3 +38,4 @@ $(document).ready(function() {
         });        
     });
 });
+$("input[name=interview]:checked").val()
