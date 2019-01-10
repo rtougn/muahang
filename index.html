@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mua hàng</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">  
+    $(document).ready(function() {  
+        loadtien();
+        loadtui();
+        var explode = function(){
+                      $("#kq").text("");
+                    };
+        function loadtien(){
+            $.ajax({
+                url: 'php/tien.php',
+                type: "POST",
+                data: ({}),
+                success: function(data){
+                    $("#tien").html(data);
+                }
+            });
+        }
+        function loadtui(){
+            $.ajax({
+                url: 'php/tui.php',
+                type: "POST",
+                data: ({}),
+                success: function(data){
+                    $("#tui").html(data);
+                }
+            });
+        }
+        $("#btn").click(function(){ 
+            $.ajax({
+                url: 'php/mua.php',
+                type: "POST",
+                data: ({ten: $('#txtten').val(),soluong: $('#sl').val()}),
+                success: function(data){
+                    $("#kq").text(data);
+                    loadtien();
+                    loadtui();
+                    setTimeout(explode, 3000);
+                }
+            });        
+        });
+    });
+    </script>
+</head>
+<body>
+Tiền: <span id="tien"></span><br />
+Tên hàng: <br />
+<input type="radio" name="txtten" id="txtten" value="banh" checked="checked">bánh<br />
+<input type="radio" name="txtten" id="txtten" value="keo">kẹo<br />
+Số lượng: <input type="text" name="sl" id="sl" value="1"><br />
+<button id="btn">Mua</button><br />
+<span id="kq"></span><br />
+Túi: 
+<div id="tui"></div><br />
+</body>
+</html>
