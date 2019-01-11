@@ -2,17 +2,11 @@
     include 'data/data.php';
     $dt = new database;
     $dt->select("SELECT ten, sl FROM tui");
-?>
-<table style="border: solid 1px black;">
-<?php
+echo "<table style='border: solid 1px black;'>";
     while ($row = $dt->fetch()){
-?>
-	<tr><td style="border: solid 1px black;">
-<?php
-	    foreach ($row as $value) { echo $value; echo " ";}
-?>
-	</tr></td>
-<?php
+echo "<tr>";
+	    foreach ($row as $value) { echo "<td style='border: solid 1px black;'>"; echo $value; echo "</td>";}
+echo "</tr>";
 	}
+echo "</table>";
 ?>
-</table>
